@@ -1,0 +1,47 @@
+<main class="page">
+  <div class="head">
+    <h1>Create Your Red Pocket Here!</h1>
+  </div>
+
+  <div>
+      <form (ngSubmit)="onSubmit()" [formGroup]="redPocketForm" class="form">
+        <label class="form-label">Title:</label>
+        <input class="form-entry" formControlName="title" placeholder="title" type="text" />
+
+        <div class="radio-container">
+          <label class="form-label">Method:</label>
+          <input class="form-radio" formControlName="method" value="email" type="radio" />
+          <span class="form-radio-label">Email</span>
+          <input class="form-radio" formControlName="method" value="other" type="radio" />
+          <span class="form-radio-label">CashApp/Venmo</span>
+        </div>
+
+        <div class="radio-container">
+          <label class="form-label">Type:</label>
+          <input class="form-radio" formControlName="type" value="random" type="radio" />
+          <span class="form-radio-label">Random</span>
+          <input class="form-radio" formControlName="type" value="fixed" type="radio" />
+          <span class="form-radio-label">Equal</span>
+        </div>
+
+        <div>
+          <label class="form-label">Total Amount:</label>
+          <input class="form-entry" formControlName="poolTotal" placeholder="0.00" type="number" min="0.01" pattern="^\d*(\.\d{0,2})?$"/>
+          <span class="warning-label" *ngIf="poolTotalInvalidNumber()">Enter a Valid Number</span>
+          <span class="warning-label" *ngIf="poolTotalInvalidAmount()">Enter a Valid Amount bigger than ${{getValidAmount()}}</span>
+        </div>
+
+        <div style="margin-top: 3%">
+         <label class="form-label">Participants:</label>
+         <input class="form-entry" formControlName="participants" placeholder="0" type="number" min="0"  onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+        </div>
+
+        <div style="margin-top: 20%; margin-bottom: 10%; text-align: center">
+          <button class="createButton" [disabled]="this.redPocketForm.invalid || poolTotalInvalidAmount()" type="submit">
+              Create
+          </button>
+        </div>
+      </form>
+  </div>
+
+</main>

@@ -1,0 +1,73 @@
+<main class="page">
+  <div *ngIf="this.view == 1" class="pocket">
+    <h1>{{this.redpocket.title}}'s {{this.redpocket.type}} Red Pocket</h1>
+    <span>${{this.redpocket.poolTotal}} Total Amount</span>
+
+    <span>{{this.redpocket.winners.length}}/{{this.redpocket.amounts.length}} Claimed!</span>
+
+    <table>
+      <tr>
+        <th>Receiver</th>
+        <th>Amount</th>
+      </tr>
+      <tr *ngFor="let w of this.redpocket.winners let index = index">
+        <td>{{this.redpocket.winners.at(index)}}</td>
+        <td>${{this.redpocket.amounts.at(index)}}</td>
+      </tr>
+    </table>
+
+    <div style="margin-top: 10%;">
+      <form
+        (ngSubmit)="onAdd()"
+        *ngIf="redpocket.winners.length < redpocket.amounts.length"
+        [formGroup]="inputForm"
+      >
+        <label style="margin-right: 1%;">Enter {{getMethodMessage()}}:</label>
+        <input (ngModelChange)="validateInput()" formControlName="input" placeholder="{{getMethodMessage()}}" type="text" />
+        <br/>
+        <span class="warning-label" *ngIf="!this.validInput && this.inputForm.controls['input'].value">Enter a Valid Email</span>
+        <div style="margin-top: 20%; margin-bottom: 10%; text-align: center">
+          <button class="openButton" [disabled]="this.inputForm.invalid || !this.validInput" type="submit">Open</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="this.view == 2" class="pocket">
+    <h1>{{this.redpocket.title}}'s {{this.redpocket.type}} Red Pocket</h1>
+    <span>${{this.redpocket.poolTotal}} Total Amount</span>
+
+    <span>{{this.redpocket.winners.length}}/{{this.redpocket.amounts.length}} Claimed!</span>
+
+    <table>
+      <tr>
+        <th>Receiver</th>
+        <th>Amount</th>
+      </tr>
+      <tr *ngFor="let w of this.redpocket.winners let index = index">
+        <td>{{this.redpocket.winners.at(index)}}</td>
+        <td>${{this.redpocket.amounts.at(index)}}</td>
+      </tr>
+    </table>
+
+    <p>You Have Successfully Created Your Red Pocket! Share This Link: </p>
+    <a href="{{getUserLink(url)}}">{{getUserLink(url)}}</a>
+    <p>Also Keep This Link, It is The Creator Link Back Here: </p>
+    <a href="{{url}}">{{url}}</a>
+    <p>The Last 6 Digits of that link is your code: {{this.redpocket.code }}</p>
+
+  </div>
+<!--  <div>-->
+<!--    <p>{{this.redpocket.id}}</p>-->
+<!--    <p>{{this.redpocket.createdAt}}</p>-->
+<!--    <p>{{this.redpocket.title}}</p>-->
+<!--    <p>{{this.redpocket.method}}</p>-->
+<!--    <p>{{this.redpocket.type}}</p>-->
+<!--    <p>{{this.redpocket.code}}</p>-->
+<!--    <p>{{this.redpocket.poolTotal}}</p>-->
+<!--    <p>{{this.redpocket.winners}}</p>-->
+<!--    <p>{{this.redpocket.amounts}}</p>-->
+<!--  </div>-->
+
+</main>
+
