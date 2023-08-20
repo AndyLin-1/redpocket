@@ -1,0 +1,28 @@
+version: '3'
+services:
+  client:
+    build:
+      context: ./redpocket-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./redpocket-frontend:/app
+      - /app/node_modules
+    command: yarn start:dev
+    restart: on-failure
+    ports:
+      - "4200:4200"
+  server:
+    build:
+      context: ./redpocket-backend
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+  database:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_DATABASE: mongodb
+    ports:
+      - "27017:27017"
