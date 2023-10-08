@@ -37,7 +37,7 @@ RedPocket is an project aimed at recreating the popular WeChat RedPacket feature
 
 Follow these steps to set up RedPocket locally:
 
-1. **Clone the Repository**: `git clone https://github.com/AndyLin-1/RedPocket.git`
+1. **Clone the Repository**: `git clone https://github.com/AndyLin-1/redpocket`
 
 2. **Make**: Install Make
 
